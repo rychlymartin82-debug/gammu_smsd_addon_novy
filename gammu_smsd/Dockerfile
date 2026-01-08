@@ -1,14 +1,14 @@
 FROM alpine:3.20
 
-# Nainstalujeme gammu a gammu-smsd
-RUN apk add --no-cache gammu gammu-smsd bash
+# Základní balíčky + Gammu
+RUN apk add --no-cache gammu gammu-smsd bash jq coreutils
 
-# Zkopírujeme konfiguraci a startovací skript
-COPY gammurc /etc/gammurc
+# Startovní skript
 COPY run.sh /run.sh
-
-# Povolení spouštění
 RUN chmod +x /run.sh
 
-# Start
+# Konfigurace (volitelné - pokud generuješ v run.sh, nemusíš kopírovat)
+# COPY gammurc /etc/gammurc
+
 CMD ["/run.sh"]
+
