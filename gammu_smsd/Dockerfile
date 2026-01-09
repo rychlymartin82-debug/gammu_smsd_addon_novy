@@ -1,16 +1,17 @@
-FROM alpine:3.18
+cat > Dockerfile << 'EOF'
+FROM alpine:3.19
 
 RUN apk add --no-cache \
+    bash \
     gammu \
     gammu-smsd \
-    jq \
-    mosquitto-clients \
-    bash
+    curl
 
-COPY run.sh /usr/local/bin/run.sh
-COPY mqtt_bridge.sh /usr/local/bin/mqtt_bridge.sh
+COPY run.sh /app/run.sh
+COPY on_receive.sh /app/on_receive.sh
 
-RUN chmod +x /usr/local/bin/run.sh && \
-    chmod +x /usr/local/bin/mqtt_bridge.sh
+RUN chmod +x /app/run.sh /app/on_receive.sh
 
-CMD ["/usr/local/bin/run.sh"]
+WORKDIR /app
+CMD ["/app/run.sh"]
+EOF
