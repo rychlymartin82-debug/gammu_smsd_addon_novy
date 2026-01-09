@@ -1,11 +1,9 @@
-# Gammu SMSD Addon
 
-Custom Home Assistant add-on for sending and receiving SMS via Huawei USB modem using Gammu SMSD.
+# Gammu SMSD Add-on (HA Green, Alpine) — s MQTT bridge
 
-Works on Home Assistant OS / Green / Yellow.
+Tento add-on umožňuje odesílání (a volitelně příjem) SMS přes Huawei USB modem v Home Assistant OS / Green.
+Nově přidává **MQTT bridge** pro odesílání, takže není potřeba `docker exec` z HA Core.
 
-## Features
-- Send and receive SMS
-- Uses Gammu SMSD running inside Alpine Linux
-- Supports devices mapped by ID: `/dev/serial/by-id/...`
+## Struktura
+
 
