@@ -2,12 +2,12 @@
   "name": "Gammu SMSD",
   "version": "1.0.0",
   "slug": "gammu_smsd",
-  "description": "SMS gateway using Gammu with MQTT bridge",
-  "arch": ["amd64", "armv7", "aarch64"],
+  "description": "SMS gateway using Gammu SMSD",
   "startup": "services",
   "boot": "auto",
-  "init": false,
-  "map": ["config:ro", "share:rw", "addons:rw", "ssl"],
+  "ports": {},
+  "ports_description": {},
+  "map": ["share:rw", "config:rw", "ssl"],
   "options": {
     "device": "/dev/ttyUSB2",
     "pin": "",
@@ -19,7 +19,7 @@
     "mqtt_host": "core-mosquitto",
     "mqtt_port": 1883,
     "mqtt_user": "smsd",
-    "mqtt_pass": "EmA605285285",
+    "mqtt_pass": "",
     "mqtt_outgoing_topic": "Ourplace/SMS/Outgoing"
   },
   "schema": {
@@ -33,15 +33,8 @@
     "mqtt_host": "str",
     "mqtt_port": "int",
     "mqtt_user": "str",
-    "mqtt_pass": "str",
+    "mqtt_pass": "str?",
     "mqtt_outgoing_topic": "str"
   },
-  "ports": {},
-  "devices": [
-    "/dev/ttyUSB0",
-    "/dev/ttyUSB1",
-    "/dev/ttyUSB2",
-    "/dev/serial/by-id"
-  ],
-  "privileged": ["SYS_ADMIN", "SYS_TIME"]
+  "devices": ["/dev/ttyUSB2:/dev/ttyUSB2:rwm"]
 }
