@@ -42,8 +42,25 @@ ErrorSMSPath = /data/error/
 RunOnReceive = /usr/local/bin/mqtt_bridge.sh
 EOF
 
-echo "Waiting for modem to settle..."
-sleep 10
+# wait for device node to appear (max 30 s)
+echo "Waiting for device node $DEVICE to appear..."
+for i in $(seq 1 30); do
+  if [ -e "$DEVICE" ]; then
+    echo "Device node found"
+    break
+  fi
+  sleep 1
+done
+
+# wait for modem to respond to gammu identify (max 40 s)
+echo "Waiting for modem to respond to AT commands..."
+for i in $(seq 1 40); do
+  if gammu --identify -c /etc/gammu-smsdrc >/dev/null 2>&1; then
+    echo "Modem responded"
+    break
+  fi
+  sleep 1
+done
 
 echo "Starting gammu-smsd..."
 exec gammu-smsd -c /etc/gammu-smsdrc -d
