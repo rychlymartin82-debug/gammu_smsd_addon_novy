@@ -18,4 +18,3 @@ RUN chmod +x /usr/local/bin/run.sh && \
     chmod +x /usr/local/bin/mqtt_bridge.sh
 
 CMD ["/usr/local/bin/run.sh"]
-
