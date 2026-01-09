@@ -1,18 +1,20 @@
-FROM alpine:3.20
+FROM alpine:3.18
 
-# Základní nástroje + Gammu + MQTT klient
+# Instalace potřebných balíků
 RUN apk add --no-cache \
-    bash jq coreutils \
-    gammu gammu-smsd \
-    mosquitto-clients
+    gammu \
+    gammu-smsd \
+    jq \
+    mosquitto-clients \
+    bash
 
-# Startovací skript
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
+# Zkopíruj skripty
+COPY run.sh /usr/local/bin/run.sh
+COPY mqtt_bridge.sh /usr/local/bin/mqtt_bridge.sh
 
-# Výchozí gammurc (run.sh si vygeneruje vlastní podle options)
-COPY gammurc /etc/gammurc
+# Nastav práva
+RUN chmod +x /usr/local/bin/run.sh && \
+    chmod +x /usr/local/bin/mqtt_bridge.sh
 
-CMD ["/run.sh"]
-
-
+# Spouštěcí skript
+CMD ["/usr/local/bin/run.sh"]
