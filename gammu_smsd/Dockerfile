@@ -5,7 +5,9 @@ RUN apk add --no-cache \
     bash \
     gammu \
     gammu-smsd \
-    curl
+    mosquitto-clients \
+    curl \
+    jq
 
 COPY run.sh /app/run.sh
 COPY on_receive.sh /app/on_receive.sh
