@@ -40,3 +40,6 @@ echo "MQTT: host=${MQTT_HOST} port=${MQTT_PORT} user=${MQTT_USER} topic=${MQTT_O
 /usr/local/bin/mqtt_bridge.sh &
 
 gammu-smsd -c $CONFIG_FILE
+
+wait
+
